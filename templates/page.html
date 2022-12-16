@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="">
+    {%- if page.type_name() == "FrontPage" %}
+    <meta name="description" content="{{ options.description }}">
+    <meta name="author" content="{{ options.author }}">
+    <meta name="keywords" content="{{ options.keywords }}">
+    {%- endif %}
+    <title>
+{%- if page.type_name() != "FrontPage" %}
+        {{ options.name }}: {{ page.title }}
+{%- else %}
+        {{ options.name }}
+{%- endif %}
+    </title>
+    <link rel="icon" href="{{ options.url }}/static/favicon.ico">
+    <link rel="stylesheet" href="{{ options.url }}/static/styles.css">
+    <link rel="stylesheet" href="{{ options.url }}/static/highlight.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="site-title">{{ options.name }}</h1>
+    </header>
+
+    <nav style="color: #666;">
+{%- if page.type_name() == "FrontPage" %}
+        <a href="{{ options.url }}">Home</a>
+    {%- for n in navs %}
+        {%- if n.type_name != "FrontPage" %}
+        <a class="nav-link" href="{{ options.url }}/{{ n.name }}/">{{ n.title }}</a>
+        {%- endif %}
+    {%- endfor %}
+{%- else %}
+    {%- if page.type_name() == "PostPage" %}
+        <a href="{{ options.url }}/{{ page.parent.name }}/">&laquo; Return to {{page.parent.title }}</a>
+    {%- else %}
+        <a href="{{ options.url }}/">&laquo; Return to Home</a>
+    {%- endif %}
+{%- endif %}
+    </nav>
+
+    <main>
+{%- if page.type_name() != "FrontPage" %}
+        <div class="page-title">
+            <h2 class="post-title">{{ page.title }}</h2>
+    {%- if page.type_name() == "PostPage" %}
+            <p class="post-meta">{{ page.date }} &middot; {{ page.subtitle }}</p>
+    {%- endif %}
+        </div>
+{%- endif %}
+<!-- the markdown part of each page/post starts (reset indentation) -->
+{%- block content %}
+{{ page.content }}
+{%- endblock %}
+<!-- the markdown part of each page/post ends -->
+    </main>
+
+    <footer>
+        &copy; {{ options.author }} - <a href="https://github.com/nerdroychan/frontpage/" target="_blank">Source Code</a>
+    </footer>
+</body>
+
+</html>

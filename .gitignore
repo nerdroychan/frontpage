@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# frontpage
+assets/*
+pages/*
+output/*
+pages.py
+config.py

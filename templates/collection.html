@@ -1,0 +1,17 @@
+{%- extends "page.html" %}
+{%- block content %}
+{%- set ns = namespace(year=0) %}
+{%- set ns.year = 0 %}
+{%- for p in posts if not p.hidden %}
+    {%- if ns.year != p.datetime.year %}
+        {%- if ns.year != 0 %}
+        </ul>
+        {%- endif %}
+        <h3 style="line-height: 100%;">{{ p.datetime.year }}</h3>
+        <ul>
+        {%- set ns.year = p.datetime.year%}
+    {%- endif %}
+            <li><a href={{ options.url }}/{{ p.parent.name }}/{{ p.uuid }}/>{{ p.title }}</a></li>
+{%- endfor %}
+        </ul>
+{%- endblock %}
