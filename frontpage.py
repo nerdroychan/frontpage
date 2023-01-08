@@ -22,12 +22,12 @@ collection_template = env.get_template("collection.html")
 markdown_extras = ["fenced-code-blocks", "target-blank-links", "nofollow", "footnotes"]
 
 # for replacing assets url in texts (.md)
-def replace_assets_url(text: str):
+def replace_assets_url(text: str) -> str:
     template = jinja2.Environment(loader=jinja2.BaseLoader()).from_string(text)
     return template.render(assets_url=urllib.parse.urljoin(options["url"], options["assets_dir"]))
 
 # for replacing static url in texts (.css)
-def replace_static_url(text: str):
+def replace_static_url(text: str) -> str:
     template = jinja2.Environment(loader=jinja2.BaseLoader()).from_string(text)
     return template.render(static_url=urllib.parse.urljoin(options["url"], "static"))
 
@@ -53,14 +53,14 @@ class Page(abc.ABC):
     def load(self):
         pass
 
-    def write(self, output_dir=output_dir):
+    def write(self, output_dir: str = output_dir):
         target_path = os.path.join(output_dir, self.target)
         pathlib.Path(target_path).mkdir(parents=True, exist_ok=True)
         path = os.path.join(target_path, "index.html")
         with open(path, "w+") as f:
             f.write(self.output)
 
-    def type_name(self):
+    def type_name(self) -> str:
         return self.__class__.__name__
 
 '''
@@ -123,7 +123,7 @@ class CollectionPage(Page):
 
         self.output = collection_template.render(options=options, navs=navs, page=self, posts=self.posts)
 
-    def write(self, output_dir=output_dir):
+    def write(self, output_dir: str = output_dir):
         for p in self.posts:
             p.write(output_dir)
         super().write(output_dir)
@@ -167,7 +167,7 @@ class PostPage(Page):
             self.content = content
             self.output = page_template.render(options=options, navs=navs, page=self)
 
-def build_skeleton(output_dir=output_dir):
+def build_skeleton(output_dir: str = output_dir):
     try:
         shutil.rmtree(output_dir)
     except:
@@ -181,7 +181,7 @@ def build_skeleton(output_dir=output_dir):
     with open(os.path.join(output_dir, "static", "styles.css"), "w") as f:
         f.write(css)
 
-def build_site(pages, output_dir=output_dir):
+def build_site(pages: list, output_dir: dir = output_dir):
     # only page in pages will show in nav bar
     navs = [{"name": p.name, "title": p.title, "type_name": p.type_name()} for p in pages if not p.hidden]
     build_skeleton(output_dir)
@@ -192,7 +192,7 @@ def build_site(pages, output_dir=output_dir):
     for p in pages:
         p.write(output_dir)
 
-def start_test_server(path):
+def start_test_server(path: str):
     os.chdir(path)
     handler = http.server.SimpleHTTPRequestHandler
     socketserver.TCPServer.allow_reuse_address = True
