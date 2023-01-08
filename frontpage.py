@@ -64,12 +64,12 @@ class Page(abc.ABC):
         return self.__class__.__name__
 
 '''
-RegularPage is all monolithic page on the website, including the home page.
+SinglePage is all monolithic page on the website, including the home page.
 A SinglePage loads the content from its src and render it using `page.html`.
 '''
 class SinglePage(Page):
-    def __init__(self, name: str, title: str):
-        super().__init__(name, title)
+    def __init__(self, name: str, title: str, hidden: bool = False):
+        super().__init__(name, title, hidden)
         self.parent = None
         self.src = self.name + ".md"
         self.target = self.name
@@ -101,8 +101,8 @@ collection.html.
 class CollectionPage(Page):
     posts = None
 
-    def __init__(self, name: str, title: str):
-        super().__init__(name, title)
+    def __init__(self, name: str, title: str, hidden: bool = False):
+        super().__init__(name, title, hidden)
         self.parent = None
         self.src = self.name
         self.target = self.name
