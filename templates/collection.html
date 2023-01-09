@@ -11,7 +11,7 @@
         <ul>
         {%- set ns.year = p.datetime.year%}
     {%- endif %}
-            <li><a href={{ options.url }}/{{ p.parent.name }}/{{ p.uuid }}/>{{ p.title }}</a></li>
+            <li><a style="text-decoration: none;" href={{ options.url }}/{{ p.parent.name }}/{{ p.uuid }}/>{{ p.title }}</a></li>
 {%- endfor %}
         </ul>
 {%- endblock %}
