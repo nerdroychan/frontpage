@@ -22,9 +22,9 @@ collection_template = env.get_template("collection.html")
 markdown_extras = ["fenced-code-blocks", "target-blank-links", "nofollow", "footnotes"]
 
 # for replacing assets url in texts (.md)
-def replace_assets_url(text: str) -> str:
+def replace_site_assets_url(text: str) -> str:
     template = jinja2.Environment(loader=jinja2.BaseLoader()).from_string(text)
-    return template.render(assets_url=urllib.parse.urljoin(options["url"], options["assets_dir"]))
+    return template.render(url=options["url"], assets_url=urllib.parse.urljoin(options["url"], options["assets_dir"]))
 
 # for replacing static url in texts (.css)
 def replace_static_url(text: str) -> str:
@@ -77,7 +77,7 @@ class SinglePage(Page):
     def load(self, navs: list):
         src_path = os.path.join(input_dir, self.src)
         with open(src_path, "r") as f:
-            self.content = markdown2.markdown(replace_assets_url(f.read()), extras=markdown_extras)
+            self.content = markdown2.markdown(replace_site_assets_url(f.read()), extras=markdown_extras)
             self.output = page_template.render(options=options, navs=navs, page=self)
 
 '''
@@ -151,7 +151,7 @@ class PostPage(Page):
     def load(self, navs: list):
         src_path = os.path.join(input_dir, self.src)
         with open(src_path, "r") as f:
-            content = markdown2.markdown(replace_assets_url(f.read()), extras=markdown_extras + ["metadata"])
+            content = markdown2.markdown(replace_site_assets_url(f.read()), extras=markdown_extras + ["metadata"])
             for k in content.metadata:
                 if k == "title":
                     self.title = content.metadata[k]
