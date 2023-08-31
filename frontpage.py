@@ -174,6 +174,7 @@ def build_skeleton(output_dir: str = output_dir):
         pass
     pathlib.Path(output_dir).mkdir(parents=True, exist_ok=True)
     shutil.copytree(os.path.join(template_dir, "static"), os.path.join(output_dir, "static"))
+    shutil.copyfile(os.path.join(template_dir, "robots.txt"), os.path.join(output_dir, "robots.txt"))
     shutil.copytree(options["assets_dir"], os.path.join(output_dir, "assets"))
     css = ""
     with open(os.path.join(output_dir, "static", "styles.css"), "r") as f:
