@@ -9,13 +9,11 @@
     <meta name="author" content="{{ options.author }}">
     <meta name="keywords" content="{{ options.keywords }}">
     {%- endif %}
-    <title>
-{%- if page.type_name() != "FrontPage" %}
-        {{ options.name }}: {{ page.title }}
-{%- else %}
-        {{ options.name }}
-{%- endif %}
-    </title>
+    {%- if page.type_name() != "FrontPage" %}
+    <title>{{ options.name }}: {{ page.title }}</title>
+    {%- else %}
+    <title>{{ options.name }}</title>
+    {%- endif %}
     <link rel="icon" href="{{ options.url }}/static/favicon.ico">
     <link rel="stylesheet" href="{{ options.url }}/static/styles.css">
     <link rel="stylesheet" href="{{ options.url }}/static/highlight.css">
@@ -23,7 +21,7 @@
 
 <body>
     <header>
-        <h1 class="site-title">{{ options.name }}</h1>
+        <h1 class="site-title">{{ options.title }}</h1>
     </header>
 
     <nav style="color: #666;">
@@ -36,9 +34,9 @@
     {%- endfor %}
 {%- else %}
     {%- if page.type_name() == "PostPage" %}
-        <a href="{{ options.url }}/{{ page.parent.name }}/">&laquo; Return to {{page.parent.title }}</a>
+        <a href="{{ options.url }}/{{ page.parent.name }}/">&#8604; Return to {{page.parent.title }}</a>
     {%- else %}
-        <a href="{{ options.url }}/">&laquo; Return to Home</a>
+        <a href="{{ options.url }}/">&#8604; Return to Home</a>
     {%- endif %}
 {%- endif %}
     </nav>
@@ -52,11 +50,9 @@
     {%- endif %}
         </div>
 {%- endif %}
-<!-- the markdown part of each page/post starts (reset indentation) -->
 {%- block content %}
 {{ page.content }}
 {%- endblock %}
-<!-- the markdown part of each page/post ends -->
     </main>
 
     <footer>
