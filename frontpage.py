@@ -24,12 +24,12 @@ markdown_extras = ["fenced-code-blocks", "target-blank-links", "nofollow", "foot
 # for replacing assets url in texts (.md)
 def replace_site_assets_url(text: str) -> str:
     template = jinja2.Environment(loader=jinja2.BaseLoader()).from_string(text)
-    return template.render(url=options["url"], assets_url=urllib.parse.urljoin(options["url"], options["assets_dir"]))
+    return template.render(url=options["url"], assets_url=urllib.parse.urljoin(options["url"] + "/", options["assets_dir"]))
 
 # for replacing static url in texts (.css)
 def replace_static_url(text: str) -> str:
     template = jinja2.Environment(loader=jinja2.BaseLoader()).from_string(text)
-    return template.render(static_url=urllib.parse.urljoin(options["url"], "static"))
+    return template.render(static_url=urllib.parse.urljoin(options["url"] + "/", "static"))
 
 '''
 Page is the base class for every single page on the website, this class should
