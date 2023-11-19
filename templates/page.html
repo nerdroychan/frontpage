@@ -26,7 +26,7 @@
 
     <nav style="color: #666;">
 {%- if page.type_name() == "FrontPage" %}
-        <a href="{{ options.url }}">Home</a>
+        <a class="nav-home" href="{{ options.url }}">Home</a>
     {%- for n in navs %}
         {%- if n.type_name != "FrontPage" %}
         <a class="nav-link" href="{{ options.url }}/{{ n.name }}/">{{ n.title }}</a>

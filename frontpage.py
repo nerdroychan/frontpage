@@ -12,6 +12,7 @@ import socketserver
 import datetime
 import hashlib
 import bs4
+import re
 
 from config import input_dir, output_dir, template_dir, options
 
@@ -51,7 +52,18 @@ def post_process(html: str) -> str:
             href = link.attrs["href"]
             if not href.startswith(options["url"]):
                 link.attrs["target"] = "_blank"
-    return str(soup)
+    ret = soup.encode(formatter="minimal").decode()
+    # stripping
+    ret = re.sub(r"\s*\n+\s*", "\n", ret)
+    # merge two consecutive lines of texts
+    ret = re.sub(r"([^>])\n+([^<])", "\\1 \\2", ret)
+    # move starting closing tag to previous line
+    ret = re.sub(r"\n<\s*\/([^>]+)\s*>", "</\\1>", ret)
+    # if a line ends with texts, the next line must be an open tag now
+    ret = re.sub(r"([^>])\n", "\\1 ", ret)
+    # merge all lines
+    ret = re.sub("\n+", "", ret)
+    return ret
 
 
 """

@@ -103,8 +103,13 @@ nav {
     overflow: visible;
 }
 
+nav .nav-home {
+    padding-right: .25em;
+}
+
 nav .nav-link {
     padding-left: .5em;
+    padding-right: .25em;
     margin-left: .25em;
     border-left: 1px solid #8fb57f;
 }
@@ -135,7 +140,7 @@ footer {
     font-size: .8em;
     padding: .5em 2em;
     margin-bottom: 3em;
-    background: url('{{ static_url }}/noise.png'), linear-gradient(#e0e0e0, #cccccc, #b0b0b0);;
+    background: url('{{ static_url }}/noise.png'), linear-gradient(#e0e0e0, #ccc, #b0b0b0);;
     border-top: 1px solid #f2f2f2;
     border-bottom-left-radius: 0.4em;
     border-bottom-right-radius: 0.4em;
@@ -166,13 +171,13 @@ p code {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 0.4em;
-    padding: 0 0.3em;
+    padding: 0.1em 0.3em;
 }
 
 .site-title {
     color: #e8e8e8;
-    text-shadow: rgba(0, 0, 0, 0.8) 0 0 10px;
-    font-size: 2.5em;
+    text-shadow: #000 0 0 10px;
+    font-size: 2.25em;
     line-height: 100%;
     margin: .5em 0;
 }
@@ -208,8 +213,16 @@ p code {
 }
 
 .pub-when {
-    max-width: 10%;
     float: right;
+    width: 4ch;
+    max-width: 10%;
+    line-height: 1;
+    text-align: center;
+    border: 1px solid #a0a0a0;
+    padding: .15em .25em;
+    color: #3f3f3f;
+    background: #f0f0f0;
+    border-radius: .36em;
 }
 
 .pub-what {
@@ -218,6 +231,10 @@ p code {
 
 .pub-who {
     color: #666;
+}
+
+.pub-who ins {
+    text-decoration-thickness: 1px;
 }
 
 .pub-where {
