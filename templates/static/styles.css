@@ -103,6 +103,17 @@ nav {
     overflow: visible;
 }
 
+nav ul {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    margin: 0 0;
+    padding: 0 0;
+    list-style-type: none;
+}
+
 nav .nav-home {
     padding-right: .25em;
 }

@@ -26,12 +26,14 @@
 
     <nav style="color: #666;">
 {%- if page.type_name() == "FrontPage" %}
-        <a class="nav-home" href="{{ options.url }}">Home</a>
+        <ul>
+            <li><a class="nav-home" href="{{ options.url }}">Home</a></li>
     {%- for n in navs %}
         {%- if n.type_name != "FrontPage" %}
-        <a class="nav-link" href="{{ options.url }}/{{ n.name }}/">{{ n.title }}</a>
+            <li><a class="nav-link" href="{{ options.url }}/{{ n.name }}/">{{ n.title }}</a></li>
         {%- endif %}
     {%- endfor %}
+        </ul>
 {%- else %}
     {%- if page.type_name() == "PostPage" %}
         <a href="{{ options.url }}/{{ page.parent.name }}/">&#8604; Return to {{page.parent.title }}</a>

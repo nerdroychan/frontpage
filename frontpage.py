@@ -14,7 +14,11 @@ import hashlib
 import bs4
 import re
 
-from config import input_dir, output_dir, template_dir, options
+from config import options
+
+input_dir = "./pages"
+output_dir = "./output"
+template_dir = "./templates"
 
 # remove trailing slash in site url
 options["url"] = options["url"].rstrip("/")
