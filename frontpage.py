@@ -27,7 +27,7 @@ env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir))
 page_template = env.get_template("page.html")
 collection_template = env.get_template("collection.html")
 
-markdown_extras = ["fenced-code-blocks", "nofollow", "footnotes", "strike"]
+markdown_extras = ["fenced-code-blocks", "nofollow", "footnotes", "strike", "tables"]
 
 
 # for replacing assets url in texts (.md)
