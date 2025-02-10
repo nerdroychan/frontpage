@@ -54,7 +54,7 @@ def post_process(html: str) -> str:
     for link in soup.find_all("a"):
         if "href" in link.attrs:
             href = link.attrs["href"]
-            if not href.startswith(options["url"]):
+            if not href.startswith(options["url"]) and not href.startswith("#"):
                 link.attrs["target"] = "_blank"
     ret = soup.encode(formatter="minimal").decode()
     # stripping
