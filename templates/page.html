@@ -10,7 +10,7 @@
     <meta name="keywords" content="{{ options.keywords }}">
     {%- endif %}
     {%- if page.type_name() != "FrontPage" %}
-    <title>{{ options.name }}: {{ page.title }}</title>
+    <title>{{ page.title }} &vert; {{ options.name }}</title>
     {%- else %}
     <title>{{ options.name }}</title>
     {%- endif %}
